@@ -11,6 +11,6 @@ package com.mycompany.foodstorageapp;
 public class FoodStorageApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("CA1 - Algorithms and Architecture");
     }
 }
