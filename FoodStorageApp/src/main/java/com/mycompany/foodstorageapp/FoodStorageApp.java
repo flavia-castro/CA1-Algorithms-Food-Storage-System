@@ -1,8 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.mycompany.foodstorageapp;
+import java.time.LocalDate;
 
 /**
  *
@@ -11,6 +11,10 @@ package com.mycompany.foodstorageapp;
 public class FoodStorageApp {
 
     public static void main(String[] args) {
-        System.out.println("CA1 - Algorithms and Architecture");
+        FoodItem item1 = new FoodItem("Burger", 250, LocalDate.now().plusDays(7));
+        FoodItem item2 = new FoodItem("Pizza", 800, LocalDate.now().plusDays(3));
+
+        System.out.println(item1);
+        System.out.println(item2);
     }
 }
