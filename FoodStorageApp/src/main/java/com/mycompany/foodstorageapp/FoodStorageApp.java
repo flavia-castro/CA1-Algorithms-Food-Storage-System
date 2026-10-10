@@ -7,20 +7,25 @@ import java.time.LocalDate;
 
 /**
  *
- * @author flaviacastro
+ * @author flaviacastro and sissy
  */
 public class FoodStorageApp {
 
     public static void main(String[] args) {
         QueueStorage storage = new QueueStorage();
 
-        System.out.println("Empty? " + storage.isEmpty());
+        storage.add(new FoodItem("Burger", 250, LocalDate.now().plusDays(7)));
+        storage.add(new FoodItem("Pizza", 800, LocalDate.now().plusDays(3)));
+        storage.add(new FoodItem("Fries", 150, LocalDate.now().plusDays(2)));
 
-        for (int i = 1; i <= 9; i++) {
-            storage.add(new FoodItem("Burger", 250, LocalDate.now().plusDays(7)));
-            System.out.println("Items: " + storage.size());
-        }
+        System.out.println("Front: " + storage.peek());
+        System.out.println("Removed: " + storage.remove());
+        System.out.println("Removed: " + storage.remove());
+        System.out.println("Front now: " + storage.peek());
+        System.out.println("Removed: " + storage.remove());
 
-        System.out.println("Full? " + storage.isFull());
+        // The storage is empty now
+        System.out.println("Removed: " + storage.remove());
+        System.out.println("Front: " + storage.peek());
     }
 }

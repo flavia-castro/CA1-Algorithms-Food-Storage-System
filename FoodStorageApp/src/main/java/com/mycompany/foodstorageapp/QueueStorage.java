@@ -6,7 +6,7 @@ package com.mycompany.foodstorageapp;
 
 /**
  *
- * @author sissy
+ * @author sissy and flavia
  */
 public class QueueStorage implements StorageInterface {
 
@@ -44,17 +44,30 @@ public class QueueStorage implements StorageInterface {
     @Override
     public int size() {
         return count;
-
     }
 
+    // Dequeue: removes and returns the item at the front of the queue
     @Override
     public FoodItem remove() {
-        return null;
+        if (isEmpty()) {
+            System.out.println("The storage is empty. There is nothing to remove.");
+            return null;
+        }
+        FoodItem removed = items[front];
+        items[front] = null;
+        front = (front + 1) % MAX_CAPACITY;
+        count--;
+        return removed;
     }
 
+    // Peek: returns the item at the front without removing it
     @Override
     public FoodItem peek() {
-        return null;
+        if (isEmpty()) {
+            System.out.println("The storage is empty.");
+            return null;
+        }
+        return items[front];
     }
 
     @Override
