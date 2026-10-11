@@ -14,18 +14,20 @@ public class FoodStorageApp {
     public static void main(String[] args) {
         QueueStorage storage = new QueueStorage();
 
+        // Empty storage
+        storage.display();
+
         storage.add(new FoodItem("Burger", 250, LocalDate.now().plusDays(7)));
         storage.add(new FoodItem("Pizza", 800, LocalDate.now().plusDays(3)));
         storage.add(new FoodItem("Fries", 150, LocalDate.now().plusDays(2)));
+        storage.display();
 
-        System.out.println("Front: " + storage.peek());
-        System.out.println("Removed: " + storage.remove());
-        System.out.println("Removed: " + storage.remove());
-        System.out.println("Front now: " + storage.peek());
-        System.out.println("Removed: " + storage.remove());
+        System.out.println("Is there Pizza? " + storage.search("Pizza"));
+        System.out.println("Is there pizza? " + storage.search("pizza"));
+        System.out.println("Is there Hotdog? " + storage.search("Hotdog"));
 
-        // The storage is empty now
+        // Remove the first one and display again
         System.out.println("Removed: " + storage.remove());
-        System.out.println("Front: " + storage.peek());
+        storage.display();
     }
 }
