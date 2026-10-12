@@ -14,20 +14,27 @@ public class FoodStorageApp {
     public static void main(String[] args) {
         QueueStorage storage = new QueueStorage();
 
-        // Empty storage
-        storage.display();
+        //valid item
+        tryToAdd(storage, "Burger", 250, LocalDate.now().plusDays(7));
 
-        storage.add(new FoodItem("Burger", 250, LocalDate.now().plusDays(7)));
-        storage.add(new FoodItem("Pizza", 800, LocalDate.now().plusDays(3)));
-        storage.add(new FoodItem("Fries", 150, LocalDate.now().plusDays(2)));
-        storage.display();
+        //invalid items
+        tryToAdd(storage, "Taco", 250, LocalDate.now().plusDays(7));        
+        tryToAdd(storage, "Pizza", 10, LocalDate.now().plusDays(7));        
+        tryToAdd(storage, "Pizza", 5000, LocalDate.now().plusDays(7));      
+        tryToAdd(storage, "Fries", 150, LocalDate.now().minusDays(1));     
+        tryToAdd(storage, "Fries", 150, LocalDate.now().plusDays(20));
 
-        System.out.println("Is there Pizza? " + storage.search("Pizza"));
-        System.out.println("Is there pizza? " + storage.search("pizza"));
-        System.out.println("Is there Hotdog? " + storage.search("Hotdog"));
-
-        // Remove the first one and display again
-        System.out.println("Removed: " + storage.remove());
         storage.display();
+    }
+
+    //error message if the data is invalid
+    private static void tryToAdd(QueueStorage storage, String name, int weight, LocalDate bestBefore) {
+        try {
+            FoodItem item = new FoodItem(name, weight, bestBefore);
+            storage.add(item);
+            System.out.println("Added: " + item);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
