@@ -14,27 +14,25 @@ public class FoodStorageApp {
     public static void main(String[] args) {
         QueueStorage storage = new QueueStorage();
 
-        //valid item
-        tryToAdd(storage, "Burger", 250, LocalDate.now().plusDays(7));
-
-        //invalid items
-        tryToAdd(storage, "Taco", 250, LocalDate.now().plusDays(7));        
-        tryToAdd(storage, "Pizza", 10, LocalDate.now().plusDays(7));        
-        tryToAdd(storage, "Pizza", 5000, LocalDate.now().plusDays(7));      
-        tryToAdd(storage, "Fries", 150, LocalDate.now().minusDays(1));     
-        tryToAdd(storage, "Fries", 150, LocalDate.now().plusDays(20));
-
-        storage.display();
-    }
-
-    //error message if the data is invalid
-    private static void tryToAdd(QueueStorage storage, String name, int weight, LocalDate bestBefore) {
         try {
-            FoodItem item = new FoodItem(name, weight, bestBefore);
-            storage.add(item);
-            System.out.println("Added: " + item);
-        } catch (IllegalArgumentException e) {
+            storage.remove();
+        } catch (StorageEmptyException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+
+        try {
+            storage.peek();
+        } catch (StorageEmptyException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        for (int i = 1; i <= 9; i++) {
+            try {
+                storage.add(new FoodItem("Pizza", 800, LocalDate.now().plusDays(3)));
+                System.out.println("Item " + i + " added. Total: " + storage.size());
+            } catch (StorageFullException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
     }
 }

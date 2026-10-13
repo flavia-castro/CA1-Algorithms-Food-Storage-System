@@ -23,8 +23,7 @@ public class QueueStorage implements StorageInterface {
     @Override
     public void add(FoodItem item) {
         if (isFull()) {
-            System.out.println("The storage is full. Maximum is " + MAX_CAPACITY + " items.");
-            return;
+            throw new StorageFullException("The storage is full. Maximum is " + MAX_CAPACITY + " items.");
         }
         int rear = (front + count) % MAX_CAPACITY;
         items[rear] = item;
@@ -46,12 +45,10 @@ public class QueueStorage implements StorageInterface {
         return count;
     }
 
-    // Dequeue: removes and returns the item at the front of the queue
     @Override
     public FoodItem remove() {
         if (isEmpty()) {
-            System.out.println("The storage is empty. There is nothing to remove.");
-            return null;
+            throw new StorageEmptyException("The storage is empty. There is nothing to remove.");
         }
         FoodItem removed = items[front];
         items[front] = null;
@@ -60,17 +57,14 @@ public class QueueStorage implements StorageInterface {
         return removed;
     }
 
-    // Peek: returns the item at the front without removing it
     @Override
     public FoodItem peek() {
         if (isEmpty()) {
-            System.out.println("The storage is empty.");
-            return null;
+            throw new StorageEmptyException("The storage is empty. There is no item at the front.");
         }
         return items[front];
     }
 
-    // Display: shows all items, from the front to the rear of the queue
     @Override
     public void display() {
         if (isEmpty()) {
@@ -84,7 +78,6 @@ public class QueueStorage implements StorageInterface {
         }
     }
 
-    // Search: checks if a food with this name is in the storage
     @Override
     public boolean search(String name) {
         for (int i = 0; i < count; i++) {
