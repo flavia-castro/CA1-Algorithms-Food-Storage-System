@@ -80,7 +80,9 @@ public class FoodItem {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return name + " - " + weight + "g - Best before: " + bestBefore
-                + " - Added: " + timeAdded.format(formatter);
+        return "Name: " + name + "\n"
+                + "Weight: " + weight + "g\n"
+                + "Best Before: " + bestBefore + "\n"
+                + "Stored At: " + timeAdded.format(formatter);
     }
 }

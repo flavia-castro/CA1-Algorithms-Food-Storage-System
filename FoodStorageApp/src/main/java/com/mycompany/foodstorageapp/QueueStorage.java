@@ -65,17 +65,20 @@ public class QueueStorage implements StorageInterface {
         return items[front];
     }
 
+    // Display: shows all items, from the front to the rear of the queue
     @Override
     public void display() {
         if (isEmpty()) {
             System.out.println("The storage is empty.");
             return;
         }
-        System.out.println("Items in the storage (" + count + "/" + MAX_CAPACITY + "):");
+        System.out.println("\nStored Food Items (" + count + "/" + MAX_CAPACITY + "):");
         for (int i = 0; i < count; i++) {
             int index = (front + i) % MAX_CAPACITY;
-            System.out.println((i + 1) + ". " + items[index]);
+            System.out.println("----------------------");
+            System.out.println(items[index]);
         }
+        System.out.println("----------------------");
     }
 
     @Override
