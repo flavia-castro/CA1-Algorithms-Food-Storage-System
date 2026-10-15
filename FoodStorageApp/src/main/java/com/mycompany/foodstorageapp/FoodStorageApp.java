@@ -22,8 +22,11 @@ public class FoodStorageApp {
         do {
             System.out.println("\n===== FOOD STORAGE MENU =====");
             System.out.println("1. Add food item");
-            System.out.println("2. Display all items");
-            System.out.println("3. Exit");
+            System.out.println("2. Remove food item (first in)");
+            System.out.println("3. Show next item to be removed");
+            System.out.println("4. Display all items");
+            System.out.println("5. Search for a food item");
+            System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
             try {
@@ -38,21 +41,29 @@ public class FoodStorageApp {
                     addItem(sc, storage);
                     break;
                 case 2:
-                    storage.display();
+                    removeItem(storage);
                     break;
                 case 3:
+                    peekItem(storage);
+                    break;
+                case 4:
+                    storage.display();
+                    break;
+                case 5:
+                    searchItem(sc, storage);
+                    break;
+                case 6:
                     System.out.println("Closing the application. Goodbye!");
                     break;
                 default:
-                    System.out.println("Invalid option! Choose a number from the menu.");
+                    System.out.println("Invalid option! Choose a number from 1 to 6.");
             }
 
-        } while (option != 3);
+        } while (option != 6);
 
         sc.close();
     }
 
-    // Asks the user for the food details and adds it to the storage
     private static void addItem(Scanner sc, QueueStorage storage) {
 
         if (storage.isFull()) {
@@ -96,6 +107,54 @@ public class FoodStorageApp {
             System.out.println("Error: " + e.getMessage());
         } catch (StorageFullException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    // FIFO
+    private static void removeItem(QueueStorage storage) {
+        try {
+            FoodItem removed = storage.remove();
+            System.out.println("\nItem removed:");
+            System.out.println("----------------------");
+            System.out.println(removed);
+            System.out.println("----------------------");
+            System.out.println("Items left in storage: " + storage.size());
+        } catch (StorageEmptyException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void peekItem(QueueStorage storage) {
+        try {
+            FoodItem next = storage.peek();
+            System.out.println("\nNext item to be removed:");
+            System.out.println("----------------------");
+            System.out.println(next);
+            System.out.println("----------------------");
+        } catch (StorageEmptyException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void searchItem(Scanner sc, QueueStorage storage) {
+
+        if (storage.isEmpty()) {
+            System.out.println("The storage is empty. There is nothing to search.");
+            return;
+        }
+
+        System.out.print("Enter the food name to search: ");
+        String name = sc.nextLine();
+
+        if (!FoodItem.isValidName(name)) {
+            System.out.println("Invalid food! Choose: Burger, Pizza, Fries, Sandwich or Hotdog.");
+            return;
+        }
+
+        if (storage.search(name)) {
+            System.out.println(FoodItem.findFoodType(name) + " is in the storage.");
+        } else {
+            System.out.println(FoodItem.findFoodType(name) + " is not in the storage.");
         }
     }
 }

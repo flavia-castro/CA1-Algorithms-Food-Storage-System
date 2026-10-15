@@ -42,10 +42,22 @@ public class FoodItem {
                     + MAX_DAYS + " days from today.");
         }
 
-        this.name = name;
+        this.name = findFoodType(name);
         this.weight = weight;
         this.bestBefore = bestBefore;
         this.timeAdded = LocalDateTime.now();
+    }
+
+    public static String findFoodType(String name) {
+        if (name == null) {
+            return null;
+        }
+        for (String type : FOOD_TYPES) {
+            if (type.equalsIgnoreCase(name.trim())) {
+                return type;
+            }
+        }
+        return null;
     }
 
     //checking if is one of the 5 food types (ignoring upper/lower case)
