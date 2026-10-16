@@ -14,17 +14,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class FoodItem {
 
+    // The 5 food types sold by the restaurant
     public static final String[] FOOD_TYPES = {"Burger", "Pizza", "Fries", "Sandwich", "Hotdog"};
 
-    //limits
-    public static final int MIN_WEIGHT = 50;
-    public static final int MAX_WEIGHT = 2000;
-    public static final int MAX_DAYS = 14; //best before
+    // Validation limits
+    public static final int MIN_WEIGHT = 50;      // grams
+    public static final int MAX_WEIGHT = 2000;    // grams
+    public static final int MAX_DAYS = 14;        // best-before: maximum of two weeks
 
     private String name;
-    private int weight;               //grams
-    private LocalDate bestBefore;     //expiry date
-    private LocalDateTime timeAdded;  //when it was placed in the storage
+    private int weight;               // in grams
+    private LocalDate bestBefore;     // expiry date
+    private LocalDateTime timeAdded;  // when it was placed in the storage
 
     public FoodItem(String name, int weight, LocalDate bestBefore) {
         if (!isValidName(name)) {
@@ -48,6 +49,8 @@ public class FoodItem {
         this.timeAdded = LocalDateTime.now();
     }
 
+    // Returns the food type written correctly (e.g. "burger" -> "Burger"),
+    // or null if the name is not one of the 5 food types
     public static String findFoodType(String name) {
         if (name == null) {
             return null;
@@ -60,17 +63,9 @@ public class FoodItem {
         return null;
     }
 
-    //checking if is one of the 5 food types (ignoring upper/lower case)
+    // Checks if the name is one of the 5 food types (ignoring upper/lower case)
     public static boolean isValidName(String name) {
-        if (name == null) {
-            return false;
-        }
-        for (String type : FOOD_TYPES) {
-            if (type.equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
+        return findFoodType(name) != null;
     }
 
     public String getName() {
