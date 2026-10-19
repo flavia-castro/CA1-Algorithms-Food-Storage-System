@@ -6,13 +6,14 @@ package com.mycompany.foodstorageapp;
 
 /**
  *
- * @author sissy and flavia
+ * @author sissy
  */
+// circular queue using an array (FIFO)
 public class QueueStorage implements StorageInterface {
 
     private FoodItem[] items;
-    private int front;
-    private int count;
+    private int front; // index of first item
+    private int count; // number of items
 
     public QueueStorage() {
         items = new FoodItem[MAX_CAPACITY];
@@ -20,12 +21,13 @@ public class QueueStorage implements StorageInterface {
         count = 0;
     }
 
+    // adds to the back
     @Override
     public void add(FoodItem item) {
         if (isFull()) {
             throw new StorageFullException("The storage is full. Maximum is " + MAX_CAPACITY + " items.");
         }
-        int rear = (front + count) % MAX_CAPACITY;
+        int rear = (front + count) % MAX_CAPACITY; // goes back to 0 at the end
         items[rear] = item;
         count++;
     }
@@ -45,6 +47,7 @@ public class QueueStorage implements StorageInterface {
         return count;
     }
 
+    // removes from the front
     @Override
     public FoodItem remove() {
         if (isEmpty()) {
@@ -57,6 +60,7 @@ public class QueueStorage implements StorageInterface {
         return removed;
     }
 
+    // shows first item but doesn't remove it
     @Override
     public FoodItem peek() {
         if (isEmpty()) {
@@ -65,7 +69,7 @@ public class QueueStorage implements StorageInterface {
         return items[front];
     }
 
-    // Display: shows all items, from the front to the rear of the queue
+    // prints all items from front to back
     @Override
     public void display() {
         if (isEmpty()) {
@@ -81,6 +85,7 @@ public class QueueStorage implements StorageInterface {
         System.out.println("----------------------");
     }
 
+    // linear search by name
     @Override
     public boolean search(String name) {
         for (int i = 0; i < count; i++) {

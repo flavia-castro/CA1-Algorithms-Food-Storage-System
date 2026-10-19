@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  *
- * @author flavia and sissy
+ * @author flaviacastro and sissy
  */
 public class FoodStorageApp {
 
@@ -19,6 +19,7 @@ public class FoodStorageApp {
         QueueStorage storage = new QueueStorage();
         int option = 0;
 
+        // menu keeps showing until user picks 6
         do {
             System.out.println("\n===== FOOD STORAGE MENU =====");
             System.out.println("1. Add food item");
@@ -29,6 +30,7 @@ public class FoodStorageApp {
             System.out.println("6. Exit");
             System.out.print("Choose an option: ");
 
+            // if user types letters it shows an error
             try {
                 option = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -64,6 +66,7 @@ public class FoodStorageApp {
         sc.close();
     }
 
+    // asks for name, weight and date and adds the item
     private static void addItem(Scanner sc, QueueStorage storage) {
 
         if (storage.isFull()) {
@@ -76,6 +79,7 @@ public class FoodStorageApp {
         System.out.print("Name (Burger, Pizza, Fries, Sandwich, Hotdog): ");
         String name = sc.nextLine();
 
+        // check name first so user doesn't type everything for nothing
         if (!FoodItem.isValidName(name)) {
             System.out.println("Invalid food! Choose: Burger, Pizza, Fries, Sandwich or Hotdog.");
             return;
@@ -110,7 +114,7 @@ public class FoodStorageApp {
         }
     }
 
-    // FIFO
+    // takes out the first item that went in
     private static void removeItem(QueueStorage storage) {
         try {
             FoodItem removed = storage.remove();
@@ -124,6 +128,7 @@ public class FoodStorageApp {
         }
     }
 
+    // shows the next item without taking it out
     private static void peekItem(QueueStorage storage) {
         try {
             FoodItem next = storage.peek();
@@ -136,6 +141,7 @@ public class FoodStorageApp {
         }
     }
 
+    // checks if a food is in the storage
     private static void searchItem(Scanner sc, QueueStorage storage) {
 
         if (storage.isEmpty()) {

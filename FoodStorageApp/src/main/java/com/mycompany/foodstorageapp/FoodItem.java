@@ -14,20 +14,21 @@ import java.time.format.DateTimeFormatter;
  */
 public class FoodItem {
 
-    // The 5 food types sold by the restaurant
+    // foods the restaurant sells
     public static final String[] FOOD_TYPES = {"Burger", "Pizza", "Fries", "Sandwich", "Hotdog"};
 
-    // Validation limits
-    public static final int MIN_WEIGHT = 50;      // grams
-    public static final int MAX_WEIGHT = 2000;    // grams
-    public static final int MAX_DAYS = 14;        // best-before: maximum of two weeks
+    // limits for validation
+    public static final int MIN_WEIGHT = 50;
+    public static final int MAX_WEIGHT = 2000;
+    public static final int MAX_DAYS = 14;
 
     private String name;
-    private int weight;               // in grams
-    private LocalDate bestBefore;     // expiry date
-    private LocalDateTime timeAdded;  // when it was placed in the storage
+    private int weight;
+    private LocalDate bestBefore;
+    private LocalDateTime timeAdded;
 
     public FoodItem(String name, int weight, LocalDate bestBefore) {
+        // check all values before creating the item
         if (!isValidName(name)) {
             throw new IllegalArgumentException("Invalid food. Choose: Burger, Pizza, Fries, Sandwich or Hotdog.");
         }
@@ -46,11 +47,11 @@ public class FoodItem {
         this.name = findFoodType(name);
         this.weight = weight;
         this.bestBefore = bestBefore;
-        this.timeAdded = LocalDateTime.now();
+        this.timeAdded = LocalDateTime.now(); // saved automatically
     }
 
-    // Returns the food type written correctly (e.g. "burger" -> "Burger"),
-    // or null if the name is not one of the 5 food types
+    // returns the name the right way
+    // returns null if it's not one of the 5 foods
     public static String findFoodType(String name) {
         if (name == null) {
             return null;
@@ -63,7 +64,6 @@ public class FoodItem {
         return null;
     }
 
-    // Checks if the name is one of the 5 food types (ignoring upper/lower case)
     public static boolean isValidName(String name) {
         return findFoodType(name) != null;
     }

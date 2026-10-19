@@ -3,15 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package com.mycompany.foodstorageapp;
-
+ 
 /**
  *
  * @author flaviacastro
  */
 public interface StorageInterface {
-
+ 
+    // storage holds max 8 trays
     int MAX_CAPACITY = 8;
-
+ 
     void add(FoodItem item);
     FoodItem remove();
     FoodItem peek();

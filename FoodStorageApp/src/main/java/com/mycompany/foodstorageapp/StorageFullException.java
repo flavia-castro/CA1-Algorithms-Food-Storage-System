@@ -8,6 +8,7 @@ package com.mycompany.foodstorageapp;
  *
  * @author sissy
  */
+// used when storage already has 8 items
 public class StorageFullException extends RuntimeException {
 
     public StorageFullException(String message) {

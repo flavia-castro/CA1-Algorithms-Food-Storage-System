@@ -6,8 +6,9 @@ package com.mycompany.foodstorageapp;
 
 /**
  *
- * @author sissy
+ * @author flaviacastro
  */
+// used when storage has no items
 public class StorageEmptyException extends RuntimeException {
 
     public StorageEmptyException(String message) {
