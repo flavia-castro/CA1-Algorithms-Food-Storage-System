@@ -43,4 +43,3 @@ During Add, Remove and Peek operations of the circular queue, one needs to move 
 1. Open the project in NetBeans 
 2. Run **FoodStorageApp.java** to use the menu 
 3. Right-click **StorageTest.java** > Run File to see the tests
-<img width="468" height="647" alt="image" src="https://github.com/user-attachments/assets/d53936fd-c37f-4261-8eac-09a36c722a1b" />
