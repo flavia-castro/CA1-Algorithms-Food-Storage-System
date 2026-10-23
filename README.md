@@ -1,4 +1,5 @@
 # CA1-Algorithms-Food-Storage-System CA1 Group Project - Algorithms and Constructs - Java Food Storage System 
+
 ## Team 
 - Flavia Castro 2024587
 – Sissyane Rodrigues 2024410
@@ -14,8 +15,8 @@ Food is introduced into one side of the storage and removed from the opposite si
 This should prevent food from staying in storage until being expired. 
 The implementation of a queue is a circular array of size 8. After reaching the end of the array, it returns back to 0th position, so the items do not need to be moved.
 
-## Classes – 
-**FoodItem** - stores the food details and checks if the values are valid 
+## Classes 
+– **FoodItem** - stores the food details and checks if the values are valid 
 - **StorageInterface** - lists the operations of the storage 
 - **QueueStorage** - the circular queue, implements StorageInterface 
 - **StorageFullException / StorageEmptyException** - errors for full and empty storage 
@@ -23,8 +24,8 @@ The implementation of a queue is a circular array of size 8. After reaching the 
 - **StorageTest** - simple tests 
 
 ## Time Complexity | Operation | Method | Big-O | 
-|---|---|---| |
-Add (enqueue) | add() | O(1) |
+|---|---|---| 
+|Add (enqueue) | add() | O(1) |
 | Remove (dequeue) | remove() | O(1) |
 | Peek | peek() | O(1) | 
 | Display | display() | O(n) |
